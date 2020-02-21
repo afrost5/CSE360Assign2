@@ -27,7 +27,7 @@ public class SimpleList
 	 * that considers the array to be full or empty
 	 */
 	private final int EMPTY = 0;
-	private final int FULL = 10;
+	private final int FULL = 0;
 	
 	/**
 	 * The SimpleList constructor initializes the array and count field
