@@ -7,7 +7,7 @@ package cse360assign2;
  * 
  * @author Austin Frost
  * ClassID 308
- * AssignmentNumber 1
+ * AssignmentNumber 2
  */
 
 public class SimpleList 
