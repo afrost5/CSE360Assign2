@@ -41,19 +41,13 @@ public class SimpleList
 		count = 0;
 	}
 	
-	
-	//PLEASE DELETE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	public int getFull()
-	{
-		return full;
-	}
-	
 	/**
 	 * This add method inserts an element into the beginning of the array.
 	 * Elements that are already in the array will shift up one position
 	 * to make room for the new element. When the array is full and we insert
 	 * an element, the array will drop off the last element at the highest index.
-	 * After the insertion, the count field in incremented
+	 * After the insertion, the count field in incremented. If the array is full,
+	 * we increase the array by 50%.
 	 * 
 	 * @param addElement 	The integer that is added to the list
 	 */
@@ -72,6 +66,7 @@ public class SimpleList
 				full += (full / 2);
 				int temp[] = new int[full];	
 				
+				//Transfer elements from array to the larger array
 				for(int index = 0; index < count; index++)
 				{
 					temp[index] = array[index];
@@ -95,7 +90,8 @@ public class SimpleList
 	 * will search in the array for the element, remove it, and shift elements in
 	 * higher indexes downward to fill in the gap. After the removal process is finished
 	 * the count field is decreased by one. If there are duplicates of the same value,
-	 * the first instance of that value will be removed.
+	 * the first instance of that value will be removed. If the list is greater than
+	 * 25% empty, we then decrease the array size.
 	 * 
 	 * @param remElement 	The element that will be found and removed from the list
 	 */
@@ -123,6 +119,7 @@ public class SimpleList
 		}
 		count--;
 		
+		//Calculate the amount of empty space in the array
 		int emptySpace = full - count;
 		
 		if(emptySpace > full/4)
@@ -130,6 +127,7 @@ public class SimpleList
 			full -= full/4;
 			int temp[] = new int[full];
 			
+			//Transfer elements from the array to the smaller array
 			for(int index = 0; index < count; index++)
 			{
 				temp[index] = array[index];
@@ -203,5 +201,54 @@ public class SimpleList
 		
 		return searchResult;
 	}
+	/**
+	 * This method puts an integer at the end of the list. If the array is considered
+	 * full, then the array is increased by 50%. 
+	 * 
+	 * @param element	The element to be inserted at the end of the list
+	 */
 	
+	public void append(int element)
+	{
+		if(count == full)
+		{
+			full += (full / 2);
+			int temp[] = new int[full];	
+			
+			//Transfer elements from array to the larger array
+			for(int index = 0; index < count; index++)
+			{
+				temp[index] = array[index];
+			}
+			
+			array = temp;
+		}
+		
+		array[count++] = element;
+	}
+	
+	/**
+	 * This method returns the first element in the list. We simply
+	 * just access the first spot in the array.
+	 * 
+	 * @return	Element in the first section of the array.
+	 */
+	
+	public int first()
+	{
+		return array[0];
+	}
+	
+	/**
+	 * This method returns the current size for the array. This is different than
+	 * the number of elements in the array. We return the current size of the
+	 * array itself rather than the number of elements in the array
+	 * 
+	 * @return	Size of the array
+	 */
+	
+	public int size()
+	{
+		return full;
+	}
 }
