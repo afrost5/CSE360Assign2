@@ -27,7 +27,7 @@ public class SimpleList
 	 * that considers the array to be full or empty
 	 */
 	private final int EMPTY = 0;
-	private final int FULL = 10;
+	private int full = 10;
 	
 	/**
 	 * The SimpleList constructor initializes the array and count field
@@ -40,6 +40,14 @@ public class SimpleList
 		array = new int[10];
 		count = 0;
 	}
+	
+	
+	//PLEASE DELETE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	public int getFull()
+	{
+		return full;
+	}
+	
 	/**
 	 * This add method inserts an element into the beginning of the array.
 	 * Elements that are already in the array will shift up one position
@@ -59,8 +67,18 @@ public class SimpleList
 		else
 		{
 			//We remove the last element in the list if its full
-			if(count == FULL)
-				count--;
+			if(count == full)
+			{
+				full += (full / 2);
+				int temp[] = new int[full];	
+				
+				for(int index = 0; index < count; index++)
+				{
+					temp[index] = array[index];
+				}
+				
+				array = temp;
+			}
 			
 			for(int index = (count - 1); index >= 0; index--)
 			{
@@ -104,6 +122,21 @@ public class SimpleList
 			}
 		}
 		count--;
+		
+		int emptySpace = full - count;
+		
+		if(emptySpace > full/4)
+		{
+			full -= full/4;
+			int temp[] = new int[full];
+			
+			for(int index = 0; index < count; index++)
+			{
+				temp[index] = array[index];
+			}
+			
+			array = temp;
+		}
 	}
 	
 	/**
