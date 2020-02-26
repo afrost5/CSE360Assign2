@@ -63,7 +63,7 @@ public class SimpleList
 			//We remove the last element in the list if its full
 			if(count == full)
 			{
-				full += (full / 2);
+				full += (full / 2); //Increase list by 50% if full
 				int temp[] = new int[full];	
 				
 				//Transfer elements from array to the larger array
@@ -124,7 +124,7 @@ public class SimpleList
 		
 		if(emptySpace > full/4)
 		{
-			full -= full/4;
+			full -= full/4; //Decrease list by 25% if more than 25% empty
 			int temp[] = new int[full];
 			
 			//Transfer elements from the array to the smaller array
