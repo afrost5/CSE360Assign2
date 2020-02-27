@@ -27,7 +27,7 @@ public class SimpleList
 	 * that considers the array to be full or empty
 	 */
 	private final int EMPTY = 0;
-	private int full = 10;
+	private int size = 10;
 	
 	/**
 	 * The SimpleList constructor initializes the array and count field
@@ -61,10 +61,10 @@ public class SimpleList
 		else
 		{
 			//We remove the last element in the list if its full
-			if(count == full)
+			if(count == size)
 			{
-				full += (full / 2); //Increase list by 50% if full
-				int temp[] = new int[full];	
+				size += (size / 2); //Increase list by 50% if full
+				int temp[] = new int[size];	
 				
 				//Transfer elements from array to the larger array
 				for(int index = 0; index < count; index++)
@@ -115,17 +115,18 @@ public class SimpleList
 						array[shiftIndex] = array[shiftIndex + 1];
 					}
 				}
+				
+				count--;
 			}
 		}
-		count--;
 		
 		//Calculate the amount of empty space in the array
-		int emptySpace = full - count;
+		int emptySpace = size - count;
 		
-		if(emptySpace > full/4)
+		if(emptySpace > size/4 && size != 1)
 		{
-			full -= full/4; //Decrease list by 25% if more than 25% empty
-			int temp[] = new int[full];
+			size -= size/4; //Decrease list by 25% if more than 25% empty
+			int temp[] = new int[size];
 			
 			//Transfer elements from the array to the smaller array
 			for(int index = 0; index < count; index++)
@@ -210,10 +211,10 @@ public class SimpleList
 	
 	public void append(int element)
 	{
-		if(count == full)
+		if(count == size)
 		{
-			full += (full / 2);
-			int temp[] = new int[full];	
+			size += (size / 2);
+			int temp[] = new int[size];	
 			
 			//Transfer elements from array to the larger array
 			for(int index = 0; index < count; index++)
@@ -235,8 +236,13 @@ public class SimpleList
 	 */
 	
 	public int first()
-	{
-		return array[0];
+	{	
+		int returnValue = -1;
+		
+		if(count != 0)
+			returnValue = array[0];
+		
+		return returnValue;
 	}
 	
 	/**
@@ -249,6 +255,23 @@ public class SimpleList
 	
 	public int size()
 	{
-		return full;
+		return size;
+	}
+	
+	/**
+	 * This method returns the last element in the array. This is found by
+	 * taking the current count of the number of elements in the array and
+	 * subtracting the value by 1 to get the last value's index.
+	 * 
+	 * @return	Last element in the array
+	 */
+	public int last()
+	{
+		int returnValue = -1;
+		
+		if(count != 0)
+			returnValue = array[count - 1];
+		
+		return returnValue;
 	}
 }
